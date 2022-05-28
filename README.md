@@ -11,7 +11,7 @@ USB weather module using libusb.
 	$ pip install ypmeteo
 
 ypmeteo requires read/write access to a USB device file,
-see [60-ypmeteo.rules] for an example udev rule to
+see (60-ypmeteo.rules) for an example udev rule to
 place an attached Yocto-Meteo device in group plugdev.
 
 ## Usage
