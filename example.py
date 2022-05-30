@@ -12,4 +12,4 @@ with ypmeteo(timeout=10.0) as m:
                 m.t, 100.0 * m.h, m.p))
         else:
             print('Yocto-Meteo not connected')
-    sleep(5.0)
+        sleep(5.0)
