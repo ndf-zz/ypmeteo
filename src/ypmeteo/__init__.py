@@ -28,7 +28,8 @@ _log = logging.getLogger(__name__)
 class ypmeteo(Thread):
     """Yocto-Meteo Thread Object"""
 
-    def __init__(self, timeout=None):
+    def __init__(self, timeout=0):
+        """Create ypmeteo thread object."""
         Thread.__init__(self)
         self.daemon = True
         self.__m = None
@@ -138,12 +139,11 @@ class ypmeteo(Thread):
     def __enter__(self):
         _log.debug('enter context')
         self.start()
-        while not self.connected():
+        while not self.__stat:
             if self.__ct is not None:
                 self.__ct -= 0.1
                 if not self.__ct > 0.01:
-                    self.exit()
-                    raise RuntimeError('timeout waiting for USB connection')
+                    break
             sleep(0.1)
         return self
 

@@ -5,7 +5,7 @@ from ypmeteo import ypmeteo
 
 logging.basicConfig(level=logging.DEBUG)
 
-with ypmeteo(timeout=10.0) as m:
+with ypmeteo() as m:
     while True:
         if m.connected():
             print('{0:0.1f} °C, {1:0.0f} %rh, {2:0.1f} hPa'.format(
