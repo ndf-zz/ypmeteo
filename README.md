@@ -29,13 +29,12 @@ This library will only read from the first detected Yocto-Meteo module
 Yoctopuce [API](https://www.yoctopuce.com/EN/libraries.php)
 or virtual hub may be a better fit.
 
-Meteo-V2 is not supported.
+Meteo-V2 is untested.
 
 
 ## Requirements
 
-   - pyusb
-   - libusb-1.0-0
+   - pyusb (libusb)
 
 
 ## Links

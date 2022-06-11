@@ -1,3 +1,28 @@
 [build-system]
-requires = ["setuptools>=42"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "ypmeteo"
+version = "1.0.1dev1"
+description = "Read data from Yocto-Meteo module with pyusb"
+readme = "README.md"
+requires-python = ">=2.7"
+license = {text = "MIT"}
+keywords = ["velodrome", "transponder", "timing"]
+authors = [
+    {email = "ndf-zz@6-v.org", name = "Nathan Fraser"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Hardware :: Universal Serial Bus (USB) :: Miscellaneous",
+]
+dependencies = [
+    "pyusb",
+]
+
+[project.urls]
+homepage = "https://github.com/ndf-zz/ypmeteo"
