@@ -18,7 +18,7 @@ place an attached Yocto-Meteo device in group plugdev.
 
 	with ypmeteo.connect() as m:
 	    print('{0:0.1f} °C'.format(m.t))
-	    print('{0:0.0f} %rh'.format(100.0 * m.h))
+	    print('{0:0.0f} %rh'.format(m.h))
 	    print('{0:0.1f} hPa'.format(m.p))
 
 
