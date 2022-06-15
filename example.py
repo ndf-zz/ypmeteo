@@ -9,7 +9,7 @@ with ypmeteo() as m:
     while True:
         if m.connected():
             print('{0:0.1f} °C, {1:0.0f} %rh, {2:0.1f} hPa'.format(
-                m.t, 100.0 * m.h, m.p))
+                m.t, m.h, m.p))
         else:
             print('Yocto-Meteo not connected')
         sleep(5.0)

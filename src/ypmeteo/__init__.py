@@ -67,11 +67,15 @@ class ypmeteo(Thread):
                 while True:
                     _log.debug('read stale junk from command buffer')
                     junk = self.__m.read(0x81, 64, 50)
-            except usb.core.USBTimeoutError:
-                pass
+            except usb.core.USBError as e:
+                # Ignore timeout
+                if e.errno == 110:
+                    pass
+                else:
+                    raise
             # send start and conf commands, errors are collected in run
-            self.__m.write(0x01, scmd)
-            self.__m.write(0x01, ccmd)
+            self.__m.write(0x01, SCMD)
+            self.__m.write(0x01, CCMD)
             self.__stat = True
 
     def __cleanup(self):
@@ -89,7 +93,7 @@ class ypmeteo(Thread):
 
     def __read(self):
         bd = bytearray(self.__m.read(0x81, 64))
-        _log.debug('read from usb: %r', bd)
+        #_log.debug('RCV: %r', bd)
         of = 0
         while of < 64:
             pktno = bd[of] & 0x7
@@ -101,13 +105,16 @@ class ypmeteo(Thread):
                 if sb in [0x01, 0x02, 0x03]:
                     val = float(bd[of + 3:of + 3 + size - 1].decode(
                         'ascii', 'ignore'))
-                    _log.debug('pktno:%r, stream:%r, size:%r, sb:%r, val:%r',
-                               pktno, stream, size, sb, val)
+                    #_log.debug('pktno:%r, stream:%r, size:%r, sb:%r, val:%r',
+                               #pktno, stream, size, sb, val)
                     if sb == 1:
+                        _log.debug('Temperature: %r', val)
                         self.t = val
                     elif sb == 2:
+                        _log.debug('Pressure: %r', val)
                         self.p = val
                     elif sb == 3:
+                        _log.debug('Humidity: %r', val)
                         self.h = val
             of += size + 2
 
@@ -122,8 +129,12 @@ class ypmeteo(Thread):
                 if self.__stat and self.__m is not None:
                     try:
                         self.__read()
-                    except usb.core.USBTimeoutError:
-                        pass
+                    except usb.core.USBError as e:
+                        # Ignore timeout
+                        if e.errno == 110:
+                            pass
+                        else:
+                            raise
                 else:
                     self.__connect()
                     _log.debug('re-connect: %r', self.__m)

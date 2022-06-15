@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ypmeteo"
-version = "1.0.1dev1"
+version = "1.0.1"
 description = "Read data from Yocto-Meteo module with pyusb"
 readme = "README.md"
 requires-python = ">=2.7"
 license = {text = "MIT"}
-keywords = ["velodrome", "transponder", "timing"]
+keywords = ["yocto-meteo", "pyusb"]
 authors = [
     {email = "ndf-zz@6-v.org", name = "Nathan Fraser"}
 ]
